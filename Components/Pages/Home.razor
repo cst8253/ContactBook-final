@@ -1,0 +1,53 @@
+﻿@page "/"
+
+<PageTitle>Contact Book</PageTitle>
+
+<h1 class="display-4 p-5 text-center">Contact Book</h1>
+
+<form class="bg-light p-5 border border-1 mb-5">
+  <h2 class="mb-3">New Contact</h2>
+  <div class="form-group mb-3">
+    <label class="form-label" for="firstName">First Name</label>
+    <input class="form-control" type="text" id="firstName" name="firstName">
+  </div>
+  <div class="form-group mb-3">
+    <label class="form-label" for="lastName">Last Name</label>
+    <input class="form-control" type="text" id="lastName" name="lastName">
+  </div>
+  <div class="form-group mb-3">
+    <label class="form-label" for="email">Email</label>
+    <input class="form-control" type="email" id="email" name="email">
+  </div>
+  <div class="form-group mb-3">
+    <input class="form-check-input" type="checkbox" id="isFavorite" name="isFavorite">
+    <label class="form-check-label" for="isFavorite">Favorite</label>
+  </div>
+
+  <button class="btn btn-primary">Add Contact</button>
+</form>
+
+<table class="table table-striped border border-1">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Favorite</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var contact in contacts)
+    {
+      <tr>
+        <td>@contact.FirstName</td>
+        <td>@contact.LastName</td>
+        <td><a href="mailto:@contact.Email">@contact.Email</a></td>
+        <td>@if (@contact.IsFavorite) { <span>&starf;</span> }</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@code {
+  List<Contact> contacts = Helper.GetContacts();
+}
